@@ -48,7 +48,7 @@ export default function NovoMontadorPage() {
   }
 
   return (
-    <div className="max-w-xl mx-auto">
+    <div className="mx-auto max-w-xl">
       <Card>
         <CardHeader>
           <CardTitle>Cadastrar Montador</CardTitle>
@@ -60,19 +60,20 @@ export default function NovoMontadorPage() {
           <form
             id="assemblerForm"
             onSubmit={handleSubmit}
-            className="space-y-6"
+            className="space-y-5 sm:space-y-6"
           >
             <div className="space-y-2">
               <Label htmlFor="name">Nome completo</Label>
               <Input
                 id="name"
                 name="name"
+                className="h-11 text-base sm:text-sm"
                 placeholder="Ex: João da Silva"
                 required
               />
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div className="space-y-2">
                 <Label htmlFor="internalRate">Taxa Montagem na Loja (%)</Label>
                 <Input
@@ -81,6 +82,7 @@ export default function NovoMontadorPage() {
                   type="number"
                   step="0.01"
                   min="0"
+                  className="h-11 text-base sm:text-sm"
                   placeholder="Ex: 5"
                   required
                 />
@@ -94,6 +96,7 @@ export default function NovoMontadorPage() {
                   type="number"
                   step="0.01"
                   min="0"
+                  className="h-11 text-base sm:text-sm"
                   placeholder="Ex: 8"
                   required
                 />
@@ -108,9 +111,15 @@ export default function NovoMontadorPage() {
               </div>
             )}
 
-            <Button type="submit" className="w-full" disabled={isSubmitting}>
-              {isSubmitting ? "Salvando..." : "Salvar Montador"}
-            </Button>
+            <div className="sticky bottom-0 -mx-1 bg-card/95 px-1 pt-2 pb-[calc(env(safe-area-inset-bottom)+0.5rem)] backdrop-blur supports-backdrop-filter:bg-card/85 sm:static sm:mx-0 sm:bg-transparent sm:p-0">
+              <Button
+                type="submit"
+                className="h-11 w-full text-base sm:h-9 sm:text-sm"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? "Salvando..." : "Salvar Montador"}
+              </Button>
+            </div>
           </form>
         </CardContent>
       </Card>

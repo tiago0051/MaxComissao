@@ -59,11 +59,15 @@ export function ServiceOrderForm({ assemblers }: ServiceOrderFormProps) {
   }
 
   return (
-    <form id="serviceOrderForm" onSubmit={handleSubmit} className="space-y-6">
+    <form
+      id="serviceOrderForm"
+      onSubmit={handleSubmit}
+      className="space-y-5 sm:space-y-6"
+    >
       <div className="space-y-2">
         <Label htmlFor="assemblerId">Montador</Label>
         <Select name="assemblerId" required>
-          <SelectTrigger id="assemblerId">
+          <SelectTrigger id="assemblerId" className="h-11 text-base sm:text-sm">
             <SelectValue placeholder="Selecione o montador..." />
           </SelectTrigger>
           <SelectContent>
@@ -82,7 +86,7 @@ export function ServiceOrderForm({ assemblers }: ServiceOrderFormProps) {
         <RadioGroup
           name="type"
           defaultValue="INTERNAL"
-          className="grid grid-cols-2 gap-4"
+          className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4"
         >
           <div>
             <RadioGroupItem
@@ -92,7 +96,7 @@ export function ServiceOrderForm({ assemblers }: ServiceOrderFormProps) {
             />
             <Label
               htmlFor="internal"
-              className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-checked:border-primary peer-data-checked:bg-primary/5 cursor-pointer"
+              className="flex min-h-14 items-center rounded-md border-2 border-muted bg-popover p-4 text-left hover:bg-accent hover:text-accent-foreground peer-data-checked:border-primary peer-data-checked:bg-primary/5 cursor-pointer"
             >
               <span className="font-semibold">Interna (Loja)</span>
             </Label>
@@ -105,7 +109,7 @@ export function ServiceOrderForm({ assemblers }: ServiceOrderFormProps) {
             />
             <Label
               htmlFor="external"
-              className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-checked:border-primary peer-data-checked:bg-primary/5 cursor-pointer"
+              className="flex min-h-14 items-center rounded-md border-2 border-muted bg-popover p-4 text-left hover:bg-accent hover:text-accent-foreground peer-data-checked:border-primary peer-data-checked:bg-primary/5 cursor-pointer"
             >
               <span className="font-semibold">Externa (Rua)</span>
             </Label>
@@ -121,6 +125,7 @@ export function ServiceOrderForm({ assemblers }: ServiceOrderFormProps) {
           type="number"
           step="0.01"
           min="0"
+          className="h-11 text-base sm:text-sm"
           placeholder="Ex: 1500.00"
           required
         />
@@ -132,6 +137,7 @@ export function ServiceOrderForm({ assemblers }: ServiceOrderFormProps) {
           id="serviceDate"
           name="serviceDate"
           type="date"
+          className="h-11 text-base sm:text-sm"
           required
           defaultValue={new Date().toISOString().split("T")[0]}
         />
@@ -142,6 +148,7 @@ export function ServiceOrderForm({ assemblers }: ServiceOrderFormProps) {
         <Input
           id="description"
           name="description"
+          className="h-11 text-base sm:text-sm"
           placeholder="Ex: Montagem Guarda Roupa Casal"
         />
       </div>
@@ -151,6 +158,7 @@ export function ServiceOrderForm({ assemblers }: ServiceOrderFormProps) {
         <Input
           id="location"
           name="location"
+          className="h-11 text-base sm:text-sm"
           placeholder="Ex: Rua das Flores, 123"
         />
       </div>
@@ -163,9 +171,15 @@ export function ServiceOrderForm({ assemblers }: ServiceOrderFormProps) {
         </div>
       )}
 
-      <Button type="submit" className="w-full" disabled={isSubmitting}>
-        {isSubmitting ? "Processando..." : "Registrar Serviço"}
-      </Button>
+      <div className="sticky bottom-0 -mx-1 bg-card/95 px-1 pt-2 pb-[calc(env(safe-area-inset-bottom)+0.5rem)] backdrop-blur sm:static sm:mx-0 sm:bg-transparent sm:p-0">
+        <Button
+          type="submit"
+          className="h-11 w-full text-base sm:h-9 sm:text-sm"
+          disabled={isSubmitting}
+        >
+          {isSubmitting ? "Processando..." : "Registrar Serviço"}
+        </Button>
+      </div>
     </form>
   );
 }
