@@ -1,0 +1,39 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Assembler {
+  id           String         @id @default(uuid())
+  name         String
+  internalRate Float
+  externalRate Float
+  serviceOrders ServiceOrder[]
+}
+
+enum ServiceType {
+  INTERNAL
+  EXTERNAL
+}
+
+model ServiceOrder {
+  id              String      @id @default(uuid())
+  assemblerId     String
+  assembler       Assembler   @relation(fields: [assemblerId], references: [id])
+  saleValue       Decimal
+  commissionValue Decimal
+  type            ServiceType
+  description     String?
+  location        String?
+  serviceDate     DateTime
+  createdAt       DateTime    @default(now())
+}
